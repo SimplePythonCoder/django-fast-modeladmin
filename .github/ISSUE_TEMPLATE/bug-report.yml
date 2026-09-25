@@ -1,0 +1,32 @@
+name: Bug Report
+description: File a bug report.
+title: "[Bug Report]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+        Please make sure to describe the bug in detail so we can fix it
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: What version did you encounter the bug on? (Leave as "Latest" or specify a version number)
+      value: "Latest"
+      placeholder: e.g. Latest or 1.0.1
+    validations:
+      required: true
+  - type: input
+    id: bug-type
+    attributes:
+      label: Where did you encounter the bug?
+      description: Did you encounter a bug in the FAST_MODELADMIN or somewhere else?
+      placeholder: e.g. After changing the FAST_MODELADMIN
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the bug here, include steps to reproduce the bug
