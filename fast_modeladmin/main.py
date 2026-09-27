@@ -82,9 +82,9 @@ def get_dict(model=None, columns=None, parts=None,
 def _part_creator(**kwargs):
     match kwargs.get('classes'):
         case None:
-            return kwargs['label'], {'fields': kwargs['fields']}
+            return kwargs.get('label'), {'fields': kwargs['fields']}
         case list() | tuple():
-            return kwargs['label'], {'fields': kwargs['fields'], 'classes': kwargs['classes']}
+            return kwargs.get('label'), {'fields': kwargs['fields'], 'classes': kwargs['classes']}
 
     return None
 
@@ -130,9 +130,6 @@ def _interpreter(values, files, model):
         field_list = []
         for index, part in enumerate(values['parts']):
             _is_type(model, value=part, types=dict, kind='parts')
-            if part.get('label') is None:
-                _raise(model=model, error_type=OptionError, message=f'missing label in parts[{index}]')
-            _is_type(model, value=part.get('label'), types=str, kind='label')
             if part.get('fields') is None:
                 _raise(model=model, error_type=OptionError, message=f'missing fields in parts[{index}]')
             _is_type(model, value=part.get('fields'), types=[list, tuple], kind='part fields')
@@ -239,7 +236,7 @@ def _interpreter(values, files, model):
         if not values.get('search'):
             _raise(model=model, error_type=CustomSyntaxError,
                       message='cannot use search text without search')
-        _is_type(model, value=values['search text'], types=str, kind='search text')
+        _is_type(model, value=values['search_text'], types=str, kind='search text')
     if values.get('links') is not None:
         if not values.get('columns'):
             _raise(model=model, error_type=CustomSyntaxError,
